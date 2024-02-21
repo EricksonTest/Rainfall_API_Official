@@ -1,20 +1,24 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RestSharp;
 
-
-namespace Rainfall_API_Official.Drivers
+namespace RainfallAPITesting.Drivers
 {
-    internal class Driver
+    public class APIDriver
     {
-        public static void Main()
+        private RestClient client;
+        public APIDriver(string baseUrl)
         {
-            Driver.Navigate().GoToUrl("https://environment.data.gov.uk/flood-monitoring/id/stations?parameter=rainfall&_limit=50");
+            client = new RestClient(baseUrl);
+        }
+        public RestResponse GetRainfallMeasurements(string stationID, int limit)
+        {
+            var request = new RestRequest($"measurements?parameter=rainfall&_limit={limit}",Method.GET);
+
+request.AddParameter("station_id", stationID);
+            IRestResponse response = client.Execute(request);
+
+            return (RestResponse)response;
+
 
         }
-       
     }
 }

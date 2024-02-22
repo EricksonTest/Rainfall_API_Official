@@ -11,7 +11,7 @@ namespace RainfallAPITesting.StepDefinitions
         private APIDriver apiDriver;
         private Table responseTable;
 
-        public LimitParameterSteps (APIDriver apiDriver)
+        public LimitParameterSteps(APIDriver apiDriver)
 
         {
             this.apiDriver = apiDriver;
@@ -20,14 +20,14 @@ namespace RainfallAPITesting.StepDefinitions
         [When(@"I request rainfall measurements with limit ""()""")]
         public void WhenIRequestRainfallMeasurementsWithLimit(int limit)
 
-
         {
-            responseTable = apiDriver.GetRainfallMeasurements(limit);
-
-        [Then(@"the response should contain at most (.*) rainfall measurements")]
-        public void ThenTheResponseShouldContainAtMostRainfallMeasurements(int expectedCount)
-        {
-            Assert.LessOrEqual(responseTable.RowCount, expectedCount);
+            responseTable = (Table)apiDriver.GetRainfallMeasurements(limit);
         }
+            [Then(@"the response should contain at most (.*) rainfall measurements")]
+            public void ThenTheResponseShouldContainAtMostRainfallMeasurements(int expectedCount)
+            {
+                Assert.LessOrEqual(responseTable.RowCount, expectedCount);
+            }
+       
     }
 }

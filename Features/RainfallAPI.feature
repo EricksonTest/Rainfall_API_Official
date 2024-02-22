@@ -11,6 +11,6 @@ Then the response should contain at most 5 rainfall measurements
 
 Scenario: Specific Date Measurement
 Given a measurement station ID "station_id"
-And a specific date "2024-02-20"
+Given a specific date "2024-02-20"
 When I request rainfall measurements for that date
 Then the response should contain rainfall measurements only for that date
